@@ -21,6 +21,9 @@ event or up to a covering fraction.
 import numpy as np
 from scipy.interpolate import InterpolatedUnivariateSpline
 
+#change this as needed
+FOLDER = '/home/borlaff/GRID/GIT/VISsim/'
+
 
 class cosmicrays():
     """
@@ -52,8 +55,8 @@ class cosmicrays():
         self.ysize, self.xsize = self.image.shape
 
         #set up the information dictionary, first with defaults and then overwrite with inputs if given
-        self.information = (dict(cosmicraylengths='data/cdf_cr_length.dat',
-                                 cosmicraydistance='data/cdf_cr_total.dat',
+        self.information = (dict(cosmicraylengths=FOLDER + 'data/cdf_cr_length.dat',
+                                 cosmicraydistance=FOLDER + 'data/cdf_cr_total.dat',
                                  exptime=565))
         if information is not None:
             self.information.update(information)

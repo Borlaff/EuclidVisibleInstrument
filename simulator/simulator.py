@@ -237,7 +237,7 @@ except:
     CUDA = False
 
 #change this as needed
-FOLDER = '/Users/sammy/EUCLID/vissim-python/'
+FOLDER = '/home/borlaff/GRID/GIT/VISsim/'
 
 __author__ = 'Sami-Matias Niemi'
 __version__ = 1.4
