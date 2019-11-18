@@ -7,8 +7,8 @@ IO related functions.
 :author: Sami-Matias Niemi
 :contact: s.niemi@mucl.ac.uk
 """
-import datetime, cPickle, os
-import pyfits as pf
+import datetime, pickle, os
+from astropy.io import fits
 import numpy as np
 
 
@@ -63,7 +63,7 @@ def readFITSDataExcludeScanRegions(files, ext=1):
     """
     data = []
     for i, file in enumerate(files):
-        fh = pf.open(file, memmap=True)
+        fh = fits.open(file, memmap=True)
         hdu = fh[ext].header
 
         try:
@@ -106,10 +106,10 @@ def writeFITS(data, output, overwrite=True, int=True):
         os.remove(output)
 
     #create a new FITS file, using HDUList instance
-    ofd = pf.HDUList(pf.PrimaryHDU())
+    ofd = fits.HDUList(fits.PrimaryHDU())
 
     #new image HDU
-    hdu = pf.ImageHDU(data=data)
+    hdu = fits.ImageHDU(data=data)
 
     if int:
         hdu.scale('int16', '', bzero=32768)
