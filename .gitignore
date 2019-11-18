@@ -60,3 +60,5 @@ support/surfaceFitting.pyc
 objects/objects.dat
 sandbox/SOMPY.pyc
 support/GPUconvolution.pyc
+
+*.pyc
