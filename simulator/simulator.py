@@ -211,7 +211,7 @@ Contact Information
 :contact: s.niemi@icloud.com
 """
 import os, sys, datetime, math, pprint, unittest
-import ConfigParser
+import configparser
 from optparse import OptionParser
 import scipy
 from scipy.ndimage import interpolation
@@ -282,7 +282,7 @@ class VISsimulator():
         try:
             seed = int(opts.fixed)
             np.random.seed(seed=seed)  #fix the seed
-            print 'Fixing the random number generator seed to %i' % seed
+            print('Fixing the random number generator seed to %i' % seed)
         except:
             pass
 
@@ -334,7 +334,7 @@ class VISsimulator():
         """
         Reads the config file information using configParser and sets up a logger.
         """
-        self.config = ConfigParser.RawConfigParser()
+        self.config = configparser.RawConfigParser()
         self.config.readfp(open(self.configfile))
 
         #setup logger
@@ -505,10 +505,10 @@ class VISsimulator():
             pprint.pprint(self.information)
 
         self.log.info('Using the following input values:')
-        for key, value in self.information.iteritems():
+        for key, value in self.information.items():
             self.log.info('%s = %s' % (key, value))
         self.log.info('Using the following booleans:')
-        for key, value in self.booleans.iteritems():
+        for key, value in self.booleans.items():
             self.log.info('%s = %s' % (key, value))
 
 
@@ -797,7 +797,7 @@ class VISsimulator():
             hdu.header.add_history('Scaled to unsigned 16bit integer!')
 
         #add input keywords to the header
-        for key, value in self.information.iteritems():
+        for key, value in self.information.items():
             #truncate long keys
             if len(key) > 8:
                 key = key[:7]
@@ -810,7 +810,7 @@ class VISsimulator():
                     pass
 
         #write booleans
-        for key, value in self.booleans.iteritems():
+        for key, value in self.booleans.items():
             #truncate long keys
             if len(key) > 8:
                 key = key[:7]
@@ -899,10 +899,10 @@ class VISsimulator():
 
         #test that we have input data for each object type, if not exit with error
         if not np.array_equal(self.sp, np.asarray(list(objectMapping.keys()), dtype=np.int)):
-            print self.sp
-            print self.objectMapping
-            print data
-            print np.asarray(list(objectMapping.keys()))
+            print(self.sp)
+            print(self.objectMapping)
+            print(data)
+            print(np.asarray(list(objectMapping.keys())))
             self.log.error('No all object types available, will exit!')
             sys.exit('No all object types available')
 
@@ -940,7 +940,7 @@ class VISsimulator():
             #grid of PSFs
             self.log.debug('Spatially variable PSF:')
             self.log.error('NOT IMPLEMENTED!')
-            print 'Spatially variable PSF not implemented -- exiting'
+            print('Spatially variable PSF not implemented -- exiting')
             sys.exit(-9)
         else:
             #single PSF
@@ -1074,7 +1074,7 @@ class VISsimulator():
             self.log.info('Using a fixed size-magnitude relation (equation B1 from Miller et al. 2012 (1210.8201v1).')
             #testin mode will bypass the small random scaling in the size-mag relation
             #loop over exposures
-            for i in xrange(self.information['exposures']):
+            for i in range(self.information['exposures']):
                 #loop over the number of objects
                 for j, obj in enumerate(self.objects):
 
@@ -1086,7 +1086,7 @@ class VISsimulator():
                             #point source, apply PSF
                             txt = "Star: " + str(j + 1) + "/" + str(n_objects) + \
                                   " mag=" +str(obj[2]) + " intscale=" + str(intscales[j])
-                            print txt
+                            print(txt)
                             self.log.info(txt)
 
                             data = self.finemap[stype].copy()
@@ -1127,7 +1127,7 @@ class VISsimulator():
 
                             txt = "Galaxy: " +str(j+1) + "/" + str(n_objects) + " magnitude=" + str(obj[2]) + \
                                   " intscale=" + str(intscales[j]) + " FWHM=" + str(sbig*smin) + " arc sec"
-                            print txt
+                            print(txt)
                             self.log.info(txt)
 
                             #rotate the image using interpolation and suppress negative values
@@ -1185,7 +1185,7 @@ class VISsimulator():
             #loop over exposures
             self.log.info('Using equation B1 from Miller et al. 2012 (1210.8201v1) '
                           'for scale-magnitude relation with Gaussian random dispersion.')
-            for i in xrange(self.information['exposures']):
+            for i in range(self.information['exposures']):
                 #loop over the number of objects
                 for j, obj in enumerate(self.objects):
 
@@ -1196,7 +1196,7 @@ class VISsimulator():
                         if stype == 0:
                             #point source, apply PSF
                             txt = "Star: " + str(j+1) + "/" + str(n_objects) + " intscale=" + str(intscales[j])
-                            print txt
+                            print(txt)
                             self.log.info(txt)
 
                             data = self.finemap[stype].copy()
@@ -1245,7 +1245,7 @@ class VISsimulator():
 
                             txt = "Galaxy: " +str(j+1) + "/" + str(n_objects) + " magnitude=" + str(obj[2]) + \
                                   " intscale=" + str(intscales[j]) + " FWHM=" + str(sbig*smin) + " arc sec"
-                            print txt
+                            print(txt)
                             self.log.info(txt)
 
                             #rotate the image using interpolation
@@ -1300,7 +1300,7 @@ class VISsimulator():
                         self.log.info('Object %i was outside the detector area' % (j+1))
 
         self.log.info('%i objects were place on the detector' % visible)
-        print '%i objects were place on the detector' % visible
+        print('%i objects were place on the detector' % visible)
 
 
     def addObjectsAndGhosts(self):
@@ -1333,7 +1333,7 @@ class VISsimulator():
                 'Using a fixed size-magnitude relation (equation B1 from Miller et al. 2012 (1210.8201v1).')
             #testin mode will bypass the small random scaling in the size-mag relation
             #loop over exposures
-            for i in xrange(self.information['exposures']):
+            for i in range(self.information['exposures']):
                 #loop over the number of objects
                 for j, obj in enumerate(self.objects):
 
@@ -1345,7 +1345,7 @@ class VISsimulator():
                             #point source, apply PSF
                             txt = "Star: " + str(j + 1) + "/" + str(n_objects) + \
                                   " mag=" +str(obj[2]) + " intscale=" + str(intscales[j])
-                            print txt
+                            print(txt)
                             self.log.info(txt)
 
                             data = self.finemap[stype].copy()
@@ -1394,7 +1394,7 @@ class VISsimulator():
 
                             txt = "Galaxy: " + str(j + 1) + "/" + str(n_objects) + " magnitude=" + str(obj[2]) + \
                                   " intscale=" + str(intscales[j]) + " FWHM=" + str(sbig * smin) + " arc sec"
-                            print txt
+                            print(txt)
                             self.log.info(txt)
 
                             #rotate the image using interpolation and suppress negative values
@@ -1549,7 +1549,7 @@ class VISsimulator():
             #loop over exposures
             self.log.info('Using equation B1 from Miller et al. 2012 (1210.8201v1) '
                           'for scale-magnitude relation with Gaussian random dispersion.')
-            for i in xrange(self.information['exposures']):
+            for i in range(self.information['exposures']):
                 #loop over the number of objects
                 for j, obj in enumerate(self.objects):
 
@@ -1560,7 +1560,7 @@ class VISsimulator():
                         if stype == 0:
                             #point source, apply PSF
                             txt = "Star: " + str(j + 1) + "/" + str(n_objects) + " intscale=" + str(intscales[j])
-                            print txt
+                            print(txt)
                             self.log.info(txt)
 
                             data = self.finemap[stype].copy()
@@ -1617,7 +1617,7 @@ class VISsimulator():
 
                             txt = "Galaxy: " + str(j + 1) + "/" + str(n_objects) + " magnitude=" + str(obj[2]) + \
                                   " intscale=" + str(intscales[j]) + " FWHM=" + str(sbig * smin) + " arc sec"
-                            print txt
+                            print(txt)
                             self.log.info(txt)
 
                             #rotate the image using interpolation
@@ -1773,7 +1773,7 @@ class VISsimulator():
                                     self.overlayToCCD(tmp, [obj[0], obj[1] + self.ghostOffset], image=False)
 
         self.log.info('%i objects were place on the detector' % visible)
-        print '%i objects were place on the detector' % visible
+        print('%i objects were place on the detector' % visible)
 
 
     def addLampFlux(self):
@@ -2233,7 +2233,7 @@ class VISsimulator():
         hdu.header.set('INSTRUME', 'VISSim%s' % str(__version__))
 
         #add input keywords to the header
-        for key, value in self.information.iteritems():
+        for key, value in self.information.items():
             #truncate long keys
             if len(key) > 8:
                 key = key[:7]
@@ -2248,7 +2248,7 @@ class VISsimulator():
         hdu.header.set('NRPUFILE', self.information['flatfieldfile'])
 
         #write booleans
-        for key, value in self.booleans.iteritems():
+        for key, value in self.booleans.items():
             #truncate long keys
             if len(key) > 8:
                 key = key[:7]
@@ -2375,7 +2375,7 @@ class Test(unittest.TestCase):
         #load test file
         expected = pf.open(FOLDER+'data/nonoisenocrQ0_00_00testscience.fits')[1].data
         #assert
-        print 'Asserting...'
+        print('Asserting...')
         if CUDA:
             np.allclose(new, expected)
         else:
