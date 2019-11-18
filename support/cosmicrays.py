@@ -134,7 +134,7 @@ class cosmicrays():
 
             #Compute X intercepts on the pixel grid
             if ilo[i] < ihi[i]:
-                for xcoord in xrange(ilo[i], ihi[i]):
+                for xcoord in range(ilo[i], ihi[i]):
                     ok = (xcoord - x0[i]) / dx[i]
                     if np.abs(ok) <= 0.5:
                         n += 1
@@ -142,7 +142,7 @@ class cosmicrays():
                         x.append(xcoord)
                         y.append(y0[i] + ok * dy[i])
             else:
-                for xcoord in xrange(ihi[i], ilo[i]):
+                for xcoord in range(ihi[i], ilo[i]):
                     ok = (xcoord - x0[i]) / dx[i]
                     if np.abs(ok) <= 0.5:
                         n += 1
@@ -152,7 +152,7 @@ class cosmicrays():
 
             #Compute Y intercepts on the pixel grid
             if jlo[i] < jhi[i]:
-                for ycoord in xrange(jlo[i], jhi[i]):
+                for ycoord in range(jlo[i], jhi[i]):
                     ok = (ycoord - y0[i]) / dy[i]
                     if np.abs(ok) <= 0.5:
                         n += 1
@@ -160,7 +160,7 @@ class cosmicrays():
                         x.append(x0[i] + ok * dx[i])
                         y.append(ycoord)
             else:
-                for ycoord in xrange(jhi[i], jlo[i]):
+                for ycoord in range(jhi[i], jlo[i]):
                     ok = (ycoord - y0[i]) / dy[i]
                     if np.abs(ok) <= 0.5:
                         n += 1
@@ -186,7 +186,7 @@ class cosmicrays():
             y = y[args]
 
             #Decide which cell each interval traverses, and the path length
-            for i in xrange(1, n - 1):
+            for i in range(1, n - 1):
                 w = u[i + 1] - u[i]
                 cx = int(1 + np.floor((x[i + 1] + x[i]) / 2.))
                 cy = int(1 + np.floor((y[i + 1] + y[i]) / 2.))
@@ -240,11 +240,11 @@ class cosmicrays():
         #find the intercepts
         if limit is None:
             self.cosmicrayMap = self._cosmicRayIntercepts(self.cr['cr_e'], cr_x, cr_y, self.cr['cr_l'], cr_phi)
-            print 'Number of cosmic ray events:', len(self.cr['cr_e'])
+            print('Number of cosmic ray events:', len(self.cr['cr_e']))
         else:
             #limit to electron levels < limit
             msk = self.cr['cr_e'] < limit
-            print 'Number of cosmic ray events: %i / %i' % (len(self.cr['cr_e'][msk]), int(np.floor(cr_n)))
+            print('Number of cosmic ray events: %i / %i' % (len(self.cr['cr_e'][msk]), int(np.floor(cr_n))))
             self.cosmicrayMap = self._cosmicRayIntercepts(self.cr['cr_e'][msk], cr_x[msk], cr_y[msk],
                                                           self.cr['cr_l'][msk], cr_phi[msk])
 
@@ -253,7 +253,7 @@ class cosmicrays():
         text = 'The cosmic ray covering factor is %i pixels i.e. %.3f per cent' \
                % (area_cr, 100.*area_cr / (self.xsize*self.ysize))
         self.log.info(text)
-        print text
+        print(text)
 
 
     def _drawSingleEvent(self, limit=1000, cr_n=1):
@@ -290,7 +290,7 @@ class cosmicrays():
         text = 'The cosmic ray covering factor is %i pixels i.e. %.3f per cent' \
                % (area_cr, 100.*area_cr / (self.xsize*self.ysize))
         self.log.info(text)
-        print text
+        print(text)
 
 
     def _drawEventsToCoveringFactor(self, coveringFraction=3.0, limit=1000, verbose=False):
@@ -345,7 +345,7 @@ class cosmicrays():
             self.log.info(text)
 
             if verbose:
-                print text
+                print(text)
 
 
     def addCosmicRays(self, limit=None):
@@ -418,7 +418,7 @@ if __name__ == "__main__":
     CCD_cr = cosmics.addUpToFraction(1.4, limit=None, verbose=True)
 
     effected = np.count_nonzero(CCD_cr)
-    print effected, effected*100./(CCD_cr.shape[0]*CCD_cr.shape[1])
+    print(effected, effected*100./(CCD_cr.shape[0]*CCD_cr.shape[1]))
 
     #save to FITS
     fileIO.writeFITS(CCD_cr, 'cosmicrayTest.fits', int=False)
