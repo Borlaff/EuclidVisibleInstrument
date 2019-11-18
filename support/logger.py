@@ -50,5 +50,5 @@ class SimpleLogger(object):
         """
         Writes text either to file or screen.
         """
-        print >> self.file, text
-        if self.verbose: print text
+        print(text, file=self.file)
+        if self.verbose: print(text)
