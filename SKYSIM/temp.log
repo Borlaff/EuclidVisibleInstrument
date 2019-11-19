@@ -1,0 +1,4 @@
+ - Read: /home/borlaff/ESA/Euclid/SKYSIM//flat_res_ccd00.fits (hdu 1).
+ - Read: /home/borlaff/ESA/Euclid/SKYSIM/test_masked_v11.fits (hdu 1).
+ - Write (final): test_masked_v11_arith.fits
+Arithmetic finished in 0.161926 seconds
