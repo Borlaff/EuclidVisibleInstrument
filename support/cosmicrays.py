@@ -24,7 +24,7 @@ from scipy.interpolate import InterpolatedUnivariateSpline
 #change this as needed
 #FOLDER = '/home/borlaff/GRID/GIT/VISsim/'
 import pkg_resources
-FOLDER = pkg_resources.resource_filename('VISsim', 'VISsim')
+FOLDER = pkg_resources.resource_filename('VISsim', '/')
 
 class cosmicrays():
     """

@@ -243,7 +243,7 @@ __author__ = 'Sami-Matias Niemi'
 __version__ = 1.4
 
 import pkg_resources
-FOLDER = pkg_resources.resource_filename('VISsim', 'VISsim')
+FOLDER = pkg_resources.resource_filename('VISsim', '/')
 
 class VISsimulator():
     """
