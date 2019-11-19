@@ -237,11 +237,13 @@ except:
     CUDA = False
 
 #change this as needed
-FOLDER = '/home/borlaff/GRID/GIT/VISsim/'
+#FOLDER = '/home/borlaff/GRID/GIT/VISsim/'
 
 __author__ = 'Sami-Matias Niemi'
 __version__ = 1.4
 
+import pkg_resources
+FOLDER = pkg_resources.resource_filename('VISsim', 'VISsim')
 
 class VISsimulator():
     """
