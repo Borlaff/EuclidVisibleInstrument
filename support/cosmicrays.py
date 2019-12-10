@@ -345,7 +345,7 @@ class cosmicrays():
             area_cr = np.count_nonzero(self.cosmicrayMap)
             covering = 100.*area_cr / (self.xsize*self.ysize)
 
-            text = 'The cosmic ray covering factor is %i pixels i.e. %.3f per cent' % (area_cr, covering)
+            text = 'The cosmic-ray covering factor is %i pixels i.e. %.3f per cent' % (area_cr, covering)
             self.log.info(text)
 
             if verbose:
